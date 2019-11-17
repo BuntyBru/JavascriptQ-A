@@ -122,8 +122,16 @@ function makeAdder(x) {
 var add5 = makeAdder(5);
 count += add5(2)
 ```
+when makeAdder execution context pops out, javascript creates what is called 'Closure Scope', Inside of that closure scope it is the same variable environment which existed in the makeAdder context, the reason this happened because we have a function nested inside another function , The inner function is nested inside of the makeAdder variable environment, Even after makeAdder Execution environment has been popped off the execution stack, because that closure scope was created , inner has access to the 'x' variable via scope chain 
+This concept of a child function closing over the variable environment of its parent function is called Closures.
 
 
+17) What is the difference between regular functions and arrow functions ?
+
+-> a) The first is syntax
+   b) Second is not using the return keyword
+   c) Third is the usage of this keyword.
+   
 
 
 
