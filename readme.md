@@ -110,7 +110,8 @@ execution context is called scope chain
 execution stack. , The scenario where this is not true is if you have a function nested inside of another function, In this case the child function will still have 
 access to the outer function scope even after the parent execution context has been removed from the Execution Stack
 
-``var count = 0
+```
+var count = 0
 
 function makeAdder(x) {
   return function inner (y) {
@@ -119,7 +120,9 @@ function makeAdder(x) {
 }
 
 var add5 = makeAdder(5);
-count += add5(2)``
+count += add5(2)
+```
+
 
 
 
