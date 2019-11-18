@@ -130,10 +130,141 @@ This concept of a child function closing over the variable environment of its pa
 
 -> a) The first is syntax
    b) Second is not using the return keyword
-   c) Third is the usage of this keyword.
-   
+   c) Arrow functions cannot be used as a constructor, using the 'new' word with it will throw an error
+   d) Usage of 'this' keyword
+```
+   var bunny = {
+  name: 'Usagi',
+  tasks: ['transform', 'eat cake', 'blow kisses'],
+  showTasks: function() {
+    this.tasks.forEach(function(task) {
+      alert(this.name + " wants to " + task);
+    });
+  }
+};
+```
+	Now in the above case it it will lead to the following output
+```
+	// [object Window] wants to transform
+// [object Window] wants to eat cake
+// [object Window] wants to blow kisses
+```
+	But when you use arrow function as an inside function in bunny, it would lead to correct output
+
+```
+var bunny = {
+  name: 'Usagi',
+  tasks: ['transform', 'eat cake', 'blow kisses'],
+  showTasks() {
+    this.tasks.forEach((task) => {
+      alert(this.name + " wants to " + task);
+    });  
+  }
+};
+
+bunny.showTasks();
+// Usagi wants to transform
+// Usagi wants to eat cake
+// Usagi wants to blow kisses
+```
+	While in ES5 function the 'this' refers to the parent of the function, In ES6 arrow functions use lexical scoping , 'this' refers to its current surrounding scope and no further.
 
 
+18) In those boundary cases where 'this' keyword becomes problematic in ES5 functions, How would you make it work ?
+
+-> There are two ways one of which is using 'bind()' and other is passing a reference of 'this'	by creating a variable inside of the function,
+the 'bind(this)' should be added in front of the function inside the parent function.
+```
+var bunny = {
+  name: 'Usagi',
+  tasks: ['transform', 'eat cake', 'blow kisses'],
+  showTasks: function() {
+    this.tasks.forEach(function(task) {
+      alert(this.name + " wants to " + task);
+    }.bind(this));
+  }
+};
+```
+
+19) What is the difference between ES5 and ES6 version of javascript?
+
+->  a) ES6 introduced arrow functions.
+	b) ES6 introduced new ways of manipulating objects like the spread operator
+	c) Introduction of Promises by ES6
+	d) new way of exporting modules (export default myModule)
+	e) Classes were introduced by ES6
+
+20) What do you understand by Object.create ?
+
+-> Object.create allows us to create an object and whenever there is a failed property lookup on that object, it can consult another object
+
+```
+const parent = {
+  name: 'Stacey',
+  age: 35,
+  heritage: 'Irish'
+}
+
+const child = Object.create(parent)
+child.name = 'Ryan'
+child.age = 7
+
+console.log(child.name) // Ryan
+console.log(child.age) // 7
+console.log(child.heritage) // Irish
+```
+In the above code we see that the child object which has been made by  'parent' using Object.create(),
+As we see that child object has not initialized the heritage key, but we still get the output
+
+
+21) What is prototype and what is meant by prototypal Instantiation?
+
+-> Every function in javascript has a prototype property that references an object.
+Now instead of using Object.create(objName), we can directly delegate it to its prototype,like
+Object.create(objName.prototype), We call this pattern as prototypal Instantiation., Prototype is a 
+property that every function in JS has and it allows us to share methods along all instances of the function.
+
+
+22) What is the use of 'new' keyword ?
+
+-> When we invoke a function using the new keyword, the constructor job and the prototypal instantiation job is
+already done.
+
+23) Explain about static methods in class ?
+
+-> The methods which are assigned to class , not its prototypes are called static methods.
+Simply put, static methods are those which can be used by the class directly 
+
+24) Explain about getters and setters in javascript ?
+
+-> ```
+var person = {
+    firstName: 'Jimmy',
+    lastName: 'Smith',
+    get fullName() {
+        return this.firstName + ' ' + this.lastName;
+    },
+    set fullName (name) {
+        var words = name.toString().split(' ');
+        this.firstName = words[0] || '';
+        this.lastName = words[1] || '';
+    }
+}
+person.fullName = 'Jack Franklin';
+console.log(person.firstName); // Jack
+console.log(person.lastName) // Franklin
+```
+
+Many times it may happen that we would want to have a value from the object which is a mix of two or more properties
+In order to achieve that we make the use of getters and setters
+
+
+25) What is the usage of Object.defineProperty ?
+
+-> Object.defineProperty(objName, 'propertyName',{key:value}), It is used to define a new property directly on the 
+object or modifies an existing property on the object and returns the object.
+
+26) 
 
 
 
