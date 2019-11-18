@@ -264,7 +264,58 @@ In order to achieve that we make the use of getters and setters
 -> Object.defineProperty(objName, 'propertyName',{key:value}), It is used to define a new property directly on the 
 object or modifies an existing property on the object and returns the object.
 
-26) 
+26) Explain Promises ?
+
+-> A Promise is an object that may produce a single value at sometime in the future, either a resolved value,
+or a reason which says why it is not resolved, A promise may be one of the possible 3 states
+fulfilled, reject or pending, A callback can be attached to Promise to handle the fulfilled value or the reason for the rejection.
+
+We use the new keyword to create an instance of promise
+```
+const promise = new Promise()
+```
+
+27) What is the difference between undefined and not defined in javascript ?
+
+-> When a variable is declared but it is not initialized , it will give undefined, whereas when a variable is not declared but it is mentioned , it will give defined
+
+28) Explain about SSL Handshake ?
+
+-> Whenever we browse an HTTPS URL through a browser , we have too experience the SSL handshake.
+The browser and the website is creating an HTTPS connection using one way SSL handshake
+
+The main purpose of the SSL handshake is to provide privacy and data integrity for communication between a 
+server and a client, During the handshake the server and client will exchange important information required to establish a secure connection, there are two types of SSL handshakes , one-way SSL and two-way SSL
+
+The difference between them is that in one way SSL only the server authenticates with the client whereas in two-way SSL both the server and client authenticate to each other. Usually when we browse a website, One way SSL is only used, Two way SSL is mostly used in server to server communication where both parties need to validate the identity of each other.
+
+the steps are as follows
+a) the client will send information that will be required by the server to start a HTTPS connection , through the information , the client notifies the server with its version of TLS and the cipher suite list the client supports
+
+b) The server will respond back with the configuration it selected from the client's message along with its information to proceed with the handshake, Server will select the TLS version suggested by the client (the highest supported by the server), It will also send back the cipher suite which it selected from the list of cipher suits given by the client, Along with the Server Hello, the server will also send the certificate of the server with the certificate chain, the certificate chain will be validated against the certificates in the client trust store.
+
+c) The message sent by the server to the client will be used by the client to generate the per-master secret.
+
+d) The next step is of the certificate request., During this step the server will send a certificate request from the client with the certificate type and other details supported by the server , there are situations where the certificate may be empty and the client may decide whether to proceed with the client certificate or not, this marks the end of server Hello
+
+e) The client then presents its Certificate chain to the server, The certificate needs to be appropriate with respect to the negotiated cipher suite key exchange algorithm
+
+f) Client key exchange message :- This message needs to be send by the client following the Client Certificate message , If the client certificate is not being presented the client key exchange message should be sent after the client recieves the Hello Done message 
+
+g )Finished
+
+
+29) What do you understand by CORS
+-> CORS stands for Cross Origin Resource sharing, CORS is a mechanism that tells a browser when it is allowed to access a particular request when it is not of same origin.
+Whenever you try to access an API which is not of the same origin(when the endpoint is not same) , Whenever you make a cross origin request the server has to include a header when it sends the response back to your browser, So whenever you make a REST API call, the response you get back is the header file and the body, SO when you make a request you can attach this header file and at the same time when you get back the response you get it along with the headers
+
+The request which you send to the server should have a header file sent to the server so that the server gets to know that yes it is okay to open this request. The header is send mostly to avoid any malicious attacks from happening
+
+
+30) What do you mean by NaN in javascript ?
+
+-> NaN stands for Not a Number, NaN property is a value representing Not-A-Number, It is a returned value when math functions fail, example parseInt('apple') , will give NaN
+We can check about NaN by using isNan();
 
 
 
