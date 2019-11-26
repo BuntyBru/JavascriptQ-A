@@ -273,6 +273,7 @@ fulfilled, reject or pending, A callback can be attached to Promise to handle th
 We use the new keyword to create an instance of promise
 ```
 const promise = new Promise()
+
 ```
 
 27) What is the difference between undefined and not defined in javascript ?
