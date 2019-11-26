@@ -318,8 +318,97 @@ The request which you send to the server should have a header file sent to the s
 -> NaN stands for Not a Number, NaN property is a value representing Not-A-Number, It is a returned value when math functions fail, example parseInt('apple') , will give NaN
 We can check about NaN by using isNan();
 
+31) What do you mean by Event Bubbling ?
 
+-> When an event happens on an element it first runs on the handlers on it and then on its parent and then all the way up on other ancestors. There is a way to stop the bubbling , that is by using event.stopPropagation()
+It is because the thing with event bubbling is that it goes from target element straight up, Normally it goes upwards till <html> and then to document object and some even reach window.
 
+32) What do you mean by apply,call and bind?
 
+-> An object has its own properties and method which are used by the instances of the object, But in Javascript, any two objects can share their methods by using apply, call and bind
 
+call()
 
+Now suppose we have an object, obj = {num:2},
+and a method 
+```
+addNum(arg){
+return this.num +arg;
+}
+
+Now using call() we cana use this outside method for the object
+addNum.call(obj,100) // this is going to return us 102
+```
+We can add any number of arguments with call(), But the care should be taken that the first argument is an Object
+
+apply()
+Now apply() is similar to that of call(), The only difference is that we can pass array as an argument 
+addNum.apply(obj,[1,2,3]) // this will give us 8
+
+bind()
+
+```
+var obj1 = {num:2};
+
+var addToThis = function(a,b,c){
+  return this.num+a+b+c;
+}
+
+var bound = addToThis.bind(obj1);
+
+//Now bound is a function because bind() returns a function
+
+bound(1,2,3) // this returns 8 
+```
+
+32) WHat do you mean by Currying ?
+
+-> Currying is a way of constructing functions that allows partial application of a functional arguments.
+```
+var greetHello = greetCurried("Hello");
+greetHello("Heidi"); //"Hello, Heidi"
+greetHello("Eddie"); //"Hello, Eddie"
+
+//We can also use it like this
+greetCurried("Hi there")("Howard"); //"Hi there, Howard"
+
+```
+A deeply curried function
+
+```
+var greetDeeplyCurried = function(greeting) {
+  return function(separator) {
+    return function(emphasis) {
+      return function(name) {
+        console.log(greeting + separator + name + emphasis);
+      };
+    };
+  };
+};
+```
+
+33) How will you optimize a site load ?
+
+-> Website speed optimization influences the key factors of website success
+a) Conversion
+b) Visibility
+c) Usability
+
+These are the ways through which you can speed up the site load of your website
+a) Use a CDN
+b) Optimize the size of images in your website
+c) Reduce the number of plugins
+d) Minimize the number of JS and CSS files (your website contains a lot of JavaScript and CSS files, it leads to a large number of HTTP requests when your website visitors want to access particular files. These requests are treated individually by visitor’s browser and slow down the website work. If you reduce the number of JavaScript and CSS files this will undoubtedly speed up your website. Try to group all JavaScript into one and also do so with all CSS files. This will reduce the overall number of HTTP requests. There are a lot of tools to minify HTML, CSS, and JavaScript files quickly. For instance, you can use  WillPeavy, Script Minifier, or Grunt tools.)
+e) Use website caching 
+f) Database Optimization in content management system
+g) Reduce the use of web fonts
+
+34) Implement promise without using promise api?
+
+-> 
+
+35) what is the difference between callback approach and promise API ?
+
+36) How is webpack helpful ?
+
+37) What are the various type of positions in CSS ?
