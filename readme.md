@@ -409,6 +409,138 @@ g) Reduce the use of web fonts
 
 35) what is the difference between callback approach and promise API ?
 
+-> The main difference is that callback based APIs does not return a value, it just executes the callback with a result, A promise based API on the other hand returns a promise immediately
+Promises allow cleaner code.
+
 36) How is webpack helpful ?
 
-37) What are the various type of positions in CSS ?
+-> Webpack takes up files of all formats and combines them or bundles them off in smaller group of different file types, The other thing is that it also manages dependencies. i.e , It knows and makes sure that the code which needs to be uploaded first gets uploaded first.
+
+a) Webpack does code splitting, It allows us to breakup our code into chunks which can be loaded on later as the demand arises.
+b) Webpack uses Loaders by which CSS and JSX can get converted into javascript (example of loaders:- CSS & style, Sass & less , Babel(it is used to complile ES6 to ES5))
+
+37)What do you understand by event capturing ?
+
+-> Event bubbling and event capturing are the two ways for event propagation in the DOM tree
+Event bubbling is the scenario when the event clicked is propagated through its parent
+and event capturing is the scenario where the event propagates towards inner child
+
+38) Event bubbling and Event capturing may lead to expensive operations, How can this be handled ?
+
+-> For every event handler we get an argument called 'event', we can use event.stopPropagation() inside the eventHandler function in order to stop bubbling and event capturing, The only thing to take care of in this case is that we need to rememeber about the basic concepts of capturing and bubbling, capturing starts from the top to bottom in the DOM hierarchy whereas bubbling is from bottom to top,
+
+suppose in a case where we have provided 'true' as the third argument , then event.stopPropagation should be placed on the top parent element.
+
+```
+document.querySelector("#grandparent")
+  .addEventListener('click', (e) => {
+    console.log("Grandparent Clicked!");
+    //e.stopPropagation();
+  },true);
+
+  document.querySelector("#parent")
+  .addEventListener('click', (e) => {
+    console.log("Parent Clicked!");
+  },true);
+
+  document.querySelector("#child")
+  .addEventListener('click', (e) => {
+    console.log("Child Clicked!");
+  },true);
+
+```
+'true' as the third argument denotes that event capturing is enabled, 
+so now when you will click at child , you will get console.log statements of all the above, In the case of false you event bubbling is enabled.
+
+So now when 'true' is enabled, event.stopPropagation() should be placed at the top of the hierarchy.
+
+
+39) What do you understand by event delegation? 
+
+-> Event Delegation exists because of event bubbling, Many times when we create an application, We do have a lot of eventHandlers in our page, handling all these events sometime tend to be an expensive task so Event delegation helps us to manage all this.
+
+Suppose we were to design a ecommerce landing page , Now as we know that the ecommerce page will have categories of items, Now as soon as we click on the categories we will be moved to a new detail page of that particular category.
+The normal way to go through this would be attaching eventHandlers to each and every category div, 
+This means that as the number of categories grows , the number of event handlers also grows and this is not a very optimised way to deal with all of this and it may cause performance issues.
+
+Event Delegation provides us a way to deal with all of this.
+As we said that Event delegation exist because of event bubbling , so what we will do in this case is that we will provide a event handler to the parent of all the 'categories HTML' structure. Now when a person clicks on the categories list the event propagates up to the parent eventHandler and the things are taken care of.
+
+40) Write code for sum(1)(2)...(n) which returns the sum ?
+
+-> 
+```
+var sumOfAll = function(a)
+{
+  return function(b){
+    if(b)
+      {
+          return sumOfAll(a+b);
+      }
+        return a;
+  }
+}
+
+
+```
+
+41) What do you understand by the term debouncing in JS ?
+
+-> When you are developing consumer facing applications, the performance has to be taken care of,
+Now suppose we are developing a search bar in an ecommerce website, The search bar has a recommendation box where on keyClick we have to send a request to the API,
+But now the problem arises if by every keystroke we send up a request, it is going to make the application heavier.
+
+So in order to have an optimized performance we make the use of debouncing, We actually send request to the API not on every keystroke but by keeping a delay between two keystrokes whenever the delay crosses the set limit we 
+send a request to the API
+
+```
+let counter = 0;
+const getData = () => {
+  // calls an API and gets Data
+  console.log("Fetching Data ..", counter++);
+}
+
+const debounce = function (fn, d) {
+  let timer;
+  return function () {
+    let context = this,
+      args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      getData.apply(context, arguments);
+    }, d);
+  }
+}
+
+const betterFunction = debounce(getData, 300);
+```
+
+42) What do you understand by Throttling in JS ?
+
+->  Suppose there is a button which is linked to a very expensive API function, Now when the user clicks on this function, Call to that API is made, The problem arises when the user clicks on the button multiple times in a row, What this does is that it makes the expensive call to the API multiple times.
+
+In order to stop this we make the use of throttling
+
+```
+
+const throttle = (fn, limit) => {
+  let flag = true;
+  return function(){
+    let context = this;
+    let args = arguments;
+    if(flag){
+      fn.apply(context, args);
+      flag = false;
+      setTimeout(() => {
+        flag=true;
+      }, limit);
+    }
+  }
+}
+
+the above function returns a function just like in the case of Debouncing
+```
+
+43) What is the difference between throttling and debouncing?
+
+-> 
