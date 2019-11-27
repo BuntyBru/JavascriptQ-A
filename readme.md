@@ -237,7 +237,9 @@ Simply put, static methods are those which can be used by the class directly
 
 24) Explain about getters and setters in javascript ?
 
--> ```
+->
+
+```
 var person = {
     firstName: 'Jimmy',
     lastName: 'Smith',
